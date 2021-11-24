@@ -31,7 +31,21 @@ const useMarvelService = () => {
     };
   };
 
-  return { loading, error, clearError, getAllCharacters, getCharacter };
+  const _transformComics = (comics) => {
+    return {
+        id: comics.id,
+        title: comics.title,
+        thumbnail: comics.thumbnail.path + "." + comics.thumbnail.extension,
+        price: comics.prices[0].price,
+    };
+  };
+
+  const getAllComics = async (offset = 0) => {
+    const res = await request(`${_apiBase}comics?orderBy=issueNumber&limit=8&offset=${offset}&${_apiKey}`);
+    return res.data.results.map((item) => _transformComics(item));
+  };
+
+  return { loading, error, clearError, getAllCharacters, getCharacter, getAllComics };
 };
 
 export default useMarvelService;
