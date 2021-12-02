@@ -3,6 +3,8 @@ import useMarvelService from '../../services/MarvelService';
 import {useParams} from 'react-router-dom';
 import Spinner from "./../spinner/Spinner";
 import ErrorMessage from "./../errorMessage/ErrorMessage";
+import {Helmet} from "react-helmet";
+
 
 import './charDetailsPage.scss';
 
@@ -20,6 +22,13 @@ const CharDetailsPage = () => {
 
   return (
     <>
+    <Helmet>
+      <meta
+        name="description"
+        content={`${char ? char.name : 'Information about comics character'}`}
+      />
+      <title>{`${char ? char.name : 'Information about comics character'}`}</title>
+    </Helmet>
       {
         char ? (
           <div className="single-char">

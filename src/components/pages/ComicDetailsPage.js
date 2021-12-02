@@ -4,6 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import useMarvelService from "./../../services/MarvelService";
 import Spinner from "./../spinner/Spinner";
 import ErrorMessage from "./../errorMessage/ErrorMessage";
+import {Helmet} from "react-helmet";
 
 const ComicDetailsPage = () => {
   const [comic, setComic] = useState(null);
@@ -18,10 +19,20 @@ const ComicDetailsPage = () => {
 
   const spinner = loading ? <Spinner /> : null;
   const errorMessage = error ? <ErrorMessage /> : null;
-  const content = !(loading || error || !comic) ? <View comic={comic}/> : null;
+  const content = !(loading || error || !comic) ? <View comic={comic} /> : null;
 
+  console.log(comic);
   return (
     <>
+      <Helmet>
+        <meta
+          name="description"
+          content={`${comic ? comic.title : "Information about comics"}`}
+        />
+        <title>{`${
+          comic ? comic.title : "Information about comics"
+        }`}</title>
+      </Helmet>
       {spinner}
       {errorMessage}
       {content}
@@ -30,7 +41,6 @@ const ComicDetailsPage = () => {
 };
 
 const View = ({ comic }) => {
-  console.log(comic);
   return (
     <div className="single-comic">
       <img

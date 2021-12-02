@@ -6,6 +6,7 @@ import CharInfo from "../charInfo/CharInfo";
 import ErrorBoundary from "../errorBoundary/ErrorBoundary";
 import decoration from "../../resources/img/vision.png";
 import SearchForm from "./../searchForm/SearchForm";
+import { Helmet } from "react-helmet";
 
 const MainPage = () => {
   const [selectedChar, setSelectedChar] = useState(null);
@@ -16,6 +17,10 @@ const MainPage = () => {
 
   return (
     <>
+      <Helmet>
+        <meta name="description" content="List of Marvels characters" />
+        <title>Characters</title>
+      </Helmet>
       <ErrorBoundary>
         <RandomChar />
       </ErrorBoundary>
